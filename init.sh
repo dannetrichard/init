@@ -29,8 +29,7 @@ cd
 sudo apt-get update -y
 #pip3
 sudo apt-get install python3-pip -y
-pip3 install --upgrade pip
-pip3 --version
+pip3 install -U pip
 #scrapy
 pip3 install scrapy
 pip3 install tf-nightly
@@ -65,7 +64,7 @@ server {
         index index.php;
 
         location / {
-            try_files \$uri \$uri/ /index.php?\$query_string;
+            try_files $uri $uri/ /index.php?$query_string;
         }   
 
         location ~ \.php$ {
@@ -85,14 +84,3 @@ sudo systemctl restart nginx.service
 
 sudo systemctl enable nginx.service
 sudo systemctl enable php7.1-fpm.service
-
-
-
-
-
-sudo apt-get update
-sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
-sudo apt-get install python-certbot-nginx 
-sudo certbot --nginx
