@@ -6,8 +6,5 @@ sudo apt-get update -y
 composer
 laravel tiger laravel
 laravel api lumen
-. ./certbot.sh
-
-
 
 
