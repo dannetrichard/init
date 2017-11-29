@@ -21,4 +21,4 @@ sudo apt-get install python-certbot-nginx
 #composer
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
-composer config -g repo.packagist composer https://packagist.phpcomposer.com    
+composer config -g repo.packagist composer https://packagist.phpcomposer.com

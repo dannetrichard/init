@@ -3,7 +3,7 @@ function laravel(){
     mkdir /data/www/$1.jingyi-good.com 
     cd /data/www/$1.jingyi-good.com
     rm -rf $2
-    composer create-project --prefer-dist laravel\/$2
+    composer create-project --prefer-dist laravel/$2
     cd $2
     if [ "$2" == "lumen" ];then
     lumen_cfg $1
