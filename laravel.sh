@@ -12,7 +12,6 @@ function laravel(){
     laravel_cfg $1
     fi
     nginx_cfg $1 $2
-    sudo certbot --nginx
     composer dump-autoload
     cd 
 }
