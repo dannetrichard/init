@@ -11,8 +11,8 @@ function laravel(){
     else
     laravel_cfg $1
     fi
-    nginx_cfg_for_lets $1 $2
-    sudo certbot --nginx certonly
+    nginx_cfg $1 $2
+    sudo certbot --nginx
     composer dump-autoload
     cd 
 }
@@ -33,7 +33,7 @@ function laravel_cfg(){
     sed -i 's/PUSHER_APP_SECRET=/PUSHER_APP_SECRET=\nAPP_ID=wxa02ce99b50401101\nAPP_SECRET=5c9e00d42a74132b5f153c49c8f32be6/g' .env
     sed -i 's/UTC/Asia\/Shanghai/g' config/app.php
 }
-function nginx_cfg_for_lets(){
+function nginx_cfg(){
     cat >/etc/nginx/sites-available/$1.jingyi-good.com <<EOF
 server {
     listen 80;
@@ -54,22 +54,11 @@ server {
     location ~ /\.ht {
         deny all;
     }
-
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/$1.jingyi-good.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/$1.jingyi-good.com/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
-    if (\$scheme != "https") {
-        return 301 https://\$host\$request_uri;
-    } # managed by Certbot
-
 }
 EOF
     sudo ln -s /etc/nginx/sites-available/$1.jingyi-good.com /etc/nginx/sites-enabled/$1.jingyi-good.com
     sudo nginx -t
-    sudo systemctl restart nginx.service 
+    sudo systemctl restart nginx.service          
 }
 
 

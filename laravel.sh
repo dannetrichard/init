@@ -1,5 +1,6 @@
 #!/bin/bash
-function nginx_cfg(){
+
+function nginx_cfg_for_lets(){
     cat >/etc/nginx/sites-available/$1.jingyi-good.com <<EOF
 server {
     listen 80;
@@ -20,9 +21,20 @@ server {
     location ~ /\.ht {
         deny all;
     }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/$1.jingyi-good.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/$1.jingyi-good.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+    if (\$scheme != "https") {
+        return 301 https://\$host\$request_uri;
+    } # managed by Certbot
+
 }
 EOF
     sudo ln -s /etc/nginx/sites-available/$1.jingyi-good.com /etc/nginx/sites-enabled/$1.jingyi-good.com
     sudo nginx -t
-    sudo systemctl restart nginx.service          
+    sudo systemctl restart nginx.service 
 }
