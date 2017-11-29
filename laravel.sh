@@ -61,10 +61,5 @@ EOF
     sudo systemctl restart nginx.service          
 }
 
-mkdir -p /data/www/
-sudo apt-get update
-./init/pip3.sh
-#./init/nodejs.sh
-./init/lnmp.sh
 laravel tiger laravel
 laravel api lumen
