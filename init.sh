@@ -85,3 +85,14 @@ sudo systemctl restart nginx.service
 
 sudo systemctl enable nginx.service
 sudo systemctl enable php7.1-fpm.service
+
+
+
+
+
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-nginx 
+sudo certbot --nginx
