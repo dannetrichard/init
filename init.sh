@@ -67,6 +67,7 @@ server {
 
 }
 EOF
+    sudo ln -s /etc/nginx/sites-available/$1.jingyi-good.com /etc/nginx/sites-enabled/$1.jingyi-good.com
     sudo nginx -t
     sudo systemctl restart nginx.service 
 }
