@@ -1,9 +1,4 @@
 #!/bin/bash
-function composer(){
-    curl -sS https://getcomposer.org/installer | php
-    sudo mv composer.phar /usr/local/bin/composer
-    composer config -g repo.packagist composer https://packagist.phpcomposer.com    
-}
 function laravel(){
     mkdir /data/www/$1.jingyi-good.com 
     cd /data/www/$1.jingyi-good.com
@@ -15,7 +10,8 @@ function laravel(){
     else
     laravel_cfg $1
     fi
-    nginx_cfg $1 $2
+    nginx_cfg_for_lets $1 $2
+    sudo certbot --nginx certonly
     composer dump-autoload
     cd 
 }

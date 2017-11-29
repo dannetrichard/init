@@ -13,3 +13,12 @@ sudo systemctl enable php7.1-fpm.service
 sudo apt-get install nginx -y
 sudo systemctl restart nginx.service
 sudo systemctl enable nginx.service
+#!/bin/bash
+#sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install python-certbot-nginx 
+#composer
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+composer config -g repo.packagist composer https://packagist.phpcomposer.com    
