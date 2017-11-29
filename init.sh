@@ -48,7 +48,7 @@ server {
     location ~ \.php$ {
         fastcgi_pass unix:/run/php/php7.1-fpm.sock;
         include snippets/fastcgi-php.conf;
-        fastcgi_param SCRIPT_FILENAME $document_root\$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
     }
 
     location ~ /\.ht {
@@ -60,7 +60,7 @@ EOF
     sudo nginx -t
     sudo systemctl restart nginx.service          
 }
-
+: '
 mkdir -p /data/www/
 sudo apt-get update
 #mysql
@@ -69,8 +69,9 @@ sudo apt-get install mysql-server -y
 sudo apt-get install software-properties-common -y
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update -y
-sudo apt-get install php7.1 php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-mbstring php7.1-mcrypt php7.1-zip php7.1-fpm php7.1-xml -y
-sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.1/cli/php.ini
+sudo apt-get install php7.1 php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-mbstring php7.1-mcrypt php7.1-zip php7.1-fpm php7.1-xml -y'
+#sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.1/cli/php.ini
+: '
 sudo systemctl restart php7.1-fpm.service
 sudo systemctl enable php7.1-fpm.service
 #nginx
@@ -87,6 +88,6 @@ sudo apt-get install python-certbot-nginx -y
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 composer config -g repo.packagist composer https://packagist.phpcomposer.com
-
+'
 laravel tiger laravel
 laravel api lumen
