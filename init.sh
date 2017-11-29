@@ -30,6 +30,7 @@ sudo apt-get update -y
 #pip3
 sudo apt-get install python3-pip -y
 pip3 install -U pip
+pip3 --version
 #scrapy
 pip3 install scrapy
 pip3 install tf-nightly
